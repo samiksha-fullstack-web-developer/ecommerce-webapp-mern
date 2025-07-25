@@ -84,10 +84,6 @@ mongoose.connect(process.env.DATABASE_URL)
   .then(() => console.log("Mongodb connected"))
   .catch((err) => console.log(err));
 
-// Default root route to avoid "Cannot GET / in render"
-app.get('/', (req, res) => {
-  res.send('API is running successfully 🚀');
-});
 
 
 // Start the server
