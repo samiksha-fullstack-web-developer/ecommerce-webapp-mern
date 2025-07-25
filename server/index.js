@@ -27,7 +27,7 @@ const port = process.env.PORT || 5000;
 //   allowedHeaders: ['Content-Type']
 // }));
 app.use(cors({
-  origin: 'https://ecommerce-frontend-git-main-samikshas-projects-b2853bf4.vercel.app', // ✅ use your actual Vercel URL
+    origin: ["https://ecommerce-webapp-omega.vercel.app"], // your deployed frontend
   credentials: true,
 }));
 
