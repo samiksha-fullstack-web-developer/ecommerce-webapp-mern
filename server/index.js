@@ -20,11 +20,15 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // CORS middleware to allow frontend communication
+// app.use(cors({
+//   origin: 'http://localhost:5173',  // Frontend URL
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type']
+// }));
 app.use(cors({
-  origin: 'http://localhost:5173',  // Frontend URL
+  origin: 'https://your-frontend.vercel.app', // ✅ use your actual Vercel URL
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
 }));
 
 app.use(cookieParser());
