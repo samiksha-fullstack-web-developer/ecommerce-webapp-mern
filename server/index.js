@@ -26,10 +26,7 @@ const port = process.env.PORT || 5000;
 //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 //   allowedHeaders: ['Content-Type']
 // }));
-app.use(cors({
-    origin: ["https://ecommerce-webapp-omega.vercel.app"], // your deployed frontend
-  credentials: true,
-}));
+app.use(cors());
 
 app.use(cookieParser());
 
