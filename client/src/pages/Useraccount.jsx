@@ -54,8 +54,6 @@ export default function AccountPage() {
     setAddressForm(addr);
   };
 
-
-
   // Submit updated address to server
   const handleAddressSubmit = async (e) => {
     e.preventDefault();
@@ -193,22 +191,22 @@ const handleAddressChange = (e) => {
                       >
                         View
                       </Link>
+
                       {o.status === 'Pending' && (
-                        <>
-                          <button
-                            className="btn btn-sm btn-primary"
-                            onClick={() => handleCancelOrder(o._id)}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            className="btn btn-sm btn-warning text-white"
-                            onClick={() => handleDeleteOrder(o._id)}
-                          >
-                            Delete
-                          </button>
-                        </>
+                        <button
+                          className="btn btn-sm btn-primary"
+                          onClick={() => handleCancelOrder(o._id)}
+                        >
+                          Cancel
+                        </button>
                       )}
+
+                      <button
+                        className="btn btn-sm btn-warning text-white"
+                        onClick={() => handleDeleteOrder(o._id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
