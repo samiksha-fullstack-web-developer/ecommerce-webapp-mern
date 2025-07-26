@@ -81,9 +81,7 @@ exports.getAllProducts = async (req, res) => {
 // Update a product
 exports.updateProduct = async (req, res) => {
   try {
-    const updateData = {
-      ...req.body,
-    };
+    const updateData = {...req.body, };
 
     // Clean up empty or "null" strings
     Object.keys(updateData).forEach((key) => {

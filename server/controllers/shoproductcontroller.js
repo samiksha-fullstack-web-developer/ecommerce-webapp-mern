@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const Product = require("../models/Product");
-
 // FILTERED PRODUCT CONTROLLER
 exports.getFilteredProduct = async (req, res) => {
   try {
-    const { category, brand, price, page = 1, limit = 8, sort } = req.query;
+    const { category, brand, price, page = 1, limit = 9, sort } = req.query;
     const filter = {};
 
     // Parse and filter categories
