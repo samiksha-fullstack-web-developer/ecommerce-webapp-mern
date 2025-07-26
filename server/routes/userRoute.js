@@ -57,8 +57,6 @@ router.put('/address/:id', requireAuth, async (req, res) => {
   }
 });
 
-
-
 // DELETE /api/user/address/:id
 router.delete('/address/:id', requireAuth, async (req, res) => {
   try {

@@ -6,20 +6,10 @@ const product = require('../models/Product');
 const Order = require('../models/Order');
 
 // Import controller functions related to product/shop actions
-const {
-  getFilteredProduct,
-  getFilterOptions,
-  getProductById,
-  addReview,
-  updateReview,
-  deleteReview,
-  getWishlistProducts
-} = require('../controllers/shoproductcontroller');
+const {getFilteredProduct, getFilterOptions, getProductById, addReview, updateReview, deleteReview, getWishlistProducts} = require('../controllers/shoproductcontroller');
 
 // Create a new router instance
 const router = express.Router();
-
-// ---------------- Specific Routes ---------------- //
 
 // Route: Search products by keyword (name, category, brand)
 router.get('/search', async (req, res) => {

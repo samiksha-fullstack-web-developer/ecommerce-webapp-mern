@@ -67,7 +67,6 @@ router.post('/', requireAuth, async (req, res) => {
 });
 
 // Get User's Orders
-
 router.get('/', requireAuth, async (req, res) => {
   try {
     const orders = await Order.find({ user: req.session.user._id }).sort({ date: -1 });
@@ -79,7 +78,7 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 // =====================
-// 🛠 Admin: Get All Orders
+//  Admin: Get All Orders
 // =====================
 
 const requireAdmin = (req, res, next) => {
@@ -180,6 +179,7 @@ router.put('/admin/:id/status', requireAdmin, async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
+
 // DELETE /api/orders/:id
 router.delete("/:id", requireAuth, async (req, res) => {
   try {

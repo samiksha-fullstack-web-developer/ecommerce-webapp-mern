@@ -2,13 +2,7 @@
 const express = require('express');
 
 // Import controller functions for cart operations
-const {
-  addToCart,
-  getCart,
-  updateCartItem,
-  removeFromCart,
-  clearCart
-} = require('../controllers/cartController');
+const {addToCart, getCart, updateCartItem, removeFromCart, clearCart} = require('../controllers/cartController');
 
 // Create a new Express router instance
 const router = express.Router();

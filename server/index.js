@@ -73,7 +73,9 @@ app.use('/products', shopproductroute);
 
 // User routes
 app.use('/api/user', userRoutes);       // GET user data
+
 app.use('/api/cart', cartRoutes);       // Cart operations
+
 app.use('/api/orders', orderRoutes);    // User order operations
 
 // Admin order routes
