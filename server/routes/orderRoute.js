@@ -12,51 +12,6 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-const requireAdmin = (req, res, next) => {
-  if (!req.session?.user || req.session.user.role !== 'admin') {
-    return res.status(403).json({ success: false, message: 'Forbidden: Admins only' });
-  }
-  next();
-};
-//  Dashboard Summary
-router.get('/summary', requireAdmin, async (req, res) => {
-  try {
-    const totalOrders = await Order.countDocuments();
-    const totalRevenueResult = await Order.aggregate([
-      { $match: { status: { $ne: 'Cancelled' } } },
-      { $group: { _id: null, total: { $sum: "$total" } } }
-    ]);
-    const totalRevenue = totalRevenueResult[0]?.total || 0;
-
-    const pendingOrders = await Order.countDocuments({ status: 'Pending' });
-    const cancelledOrders = await Order.countDocuments({ status: 'Cancelled' });
-    const totalUsers = await User.countDocuments({ role: 'user' });
-    const totalProducts = await Product.countDocuments();
-
-    const recentOrders = await Order.find()
-      .sort({ date: -1 })
-      .limit(5)
-      .populate('user', 'username');
-
-    res.json({
-      success: true,
-      data: {
-        totalOrders,
-        totalRevenue,
-        pendingOrders,
-        cancelledOrders,
-        totalUsers,
-        totalProducts,
-        recentOrders,
-      }
-    });
-  } catch (err) {
-    console.error('❌ Admin summary fetch error:', err);
-    res.status(500).json({ success: false, message: 'Server error' });
-  }
-});
-
-
 // Place a New Order
 router.post('/', requireAuth, async (req, res) => {
   try {
@@ -126,6 +81,51 @@ router.get('/', requireAuth, async (req, res) => {
 // =====================
 // 🛠 Admin: Get All Orders
 // =====================
+
+const requireAdmin = (req, res, next) => {
+  if (!req.session?.user || req.session.user.role !== 'admin') {
+    return res.status(403).json({ success: false, message: 'Forbidden: Admins only' });
+  }
+  next();
+};
+//  Dashboard Summary
+router.get('/summary', requireAdmin, async (req, res) => {
+  try {
+    const totalOrders = await Order.countDocuments();
+    const totalRevenueResult = await Order.aggregate([
+      { $match: { status: { $ne: 'Cancelled' } } },
+      { $group: { _id: null, total: { $sum: "$total" } } }
+    ]);
+    const totalRevenue = totalRevenueResult[0]?.total || 0;
+
+    const pendingOrders = await Order.countDocuments({ status: 'Pending' });
+    const cancelledOrders = await Order.countDocuments({ status: 'Cancelled' });
+    const totalUsers = await User.countDocuments({ role: 'user' });
+    const totalProducts = await Product.countDocuments();
+
+    const recentOrders = await Order.find()
+      .sort({ date: -1 })
+      .limit(5)
+      .populate('user', 'username');
+
+    res.json({
+      success: true,
+      data: {
+        totalOrders,
+        totalRevenue,
+        pendingOrders,
+        cancelledOrders,
+        totalUsers,
+        totalProducts,
+        recentOrders,
+      }
+    });
+  } catch (err) {
+    console.error('❌ Admin summary fetch error:', err);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 router.get('/admin/all', requireAdmin, async (req, res) => {
   try {
     const orders = await Order.find()
@@ -151,7 +151,6 @@ router.put('/admin/:id/cancel', requireAdmin, async (req, res) => {
     if (['Cancelled', 'Delivered'].includes(order.status)) {
       return res.status(400).json({ success: false, message: 'Order cannot be cancelled' });
     }
-
     order.status = 'Cancelled';
     order.cancellationReason = reason || 'Cancelled by admin';
     await order.save();
