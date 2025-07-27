@@ -289,7 +289,7 @@ export default function Adminproducts() {
             <div className="mb-3">
               <input type="file" name="image" accept="image/*" onChange={handleChange} />
               {formData.imagePreview && (
-                <div className="mt-2 position-relative d-inline-block">
+                <div className="mt-2 mb-3 position-relative d-inline-block">
                   <img src={formData.imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
                   <button type="button" className="btn btn-sm btn-outline-danger position-absolute top-0 end-0" onClick={handleImageRemove}><X size={12} /></button>
                 </div>

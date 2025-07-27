@@ -5,12 +5,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-const Shoppinghome = () => {
-  // State to store categories fetched from backend
-  const [categories, setCategories] = useState([]);
-
+const Shoppinghome = () => {  
+  
   // State to control entrance animation
   const [show, setShow] = useState(false);
+
+  // State to store categories fetched from backend
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     // Trigger entrance animation with slight delay

@@ -17,7 +17,7 @@ export default function Productfilter({ onChange, selectedFilters }) {
           setCategories(data.categories || []);
           setBrands(data.brands || []);
           if (data.maxPrice) {
-            setMaxPrice(data.maxPrice); // ❗ Missing setMaxPrice definition (possible bug)
+            setMaxPrice(data.maxPrice); 
             setPriceRange([0, data.maxPrice]); // Update price range slider
           }
         }
