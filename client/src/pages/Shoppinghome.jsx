@@ -29,6 +29,7 @@ const Shoppinghome = () => {
       } catch (err) {
         console.error("Error fetching categories:", err);
       }
+    
     };
     fetchCategories();
   }, []);

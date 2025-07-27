@@ -53,6 +53,7 @@ export default function ProductListingPage() {
       price: Number(searchParams.get('price')) || null,
       sort: searchParams.get('sort') || '',
     };
+    setLoading(true);
     setFilters(initialFilters);
   }, [searchParams]);
 
@@ -81,6 +82,7 @@ export default function ProductListingPage() {
           : prev[type].filter((item) => item !== value);
       }
       updateURL(updated);
+
       return updated;
     });
   };
