@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { Heart } from 'lucide-react';
 import { Toaster, toast } from 'react-hot-toast';
+import LoadingSpinner from '../components/Spinner';
 
 export default function ProductListingPage() {
   // Sidebar toggle for mobile
@@ -18,6 +19,9 @@ export default function ProductListingPage() {
 
   // Location to detect route changes
   const location = useLocation();
+
+  //spinner
+  const [loading, setLoading] = useState(true);
 
   // Cart and wishlist context
   const { cart, addToCart, updateQuantity, removeFromCart } = useCart();
@@ -108,10 +112,15 @@ export default function ProductListingPage() {
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+    finally {
+      setLoading(false);
+    }
   };
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="container mt-5">
+
       {/* Toast notifications */}
       <Toaster position="top-right" autoClose={3000} />
 
